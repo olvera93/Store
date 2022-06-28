@@ -14,19 +14,20 @@ abstract class StoreDatabase: RoomDatabase() {
 
     companion object { // Esta clase es un singleton por lo que solo se crea una vez y se utiliza para acceder a la base de datos de manera global
 
-        @Volatile
-        var instance: StoreDatabase? = null
+        private var instance: StoreDatabase? = null
 
-        @Synchronized
-        fun getInstance(context: Context): StoreDatabase {
+        fun getInstance(context: Context): StoreDatabase? {
             if (instance == null) {
-                instance = Room.databaseBuilder(
-                    context.applicationContext,
+                synchronized(StoreDatabase::class) {
+                    Room.databaseBuilder(context.applicationContext,
                     StoreDatabase::class.java,
-                    "stores.db"
-                ).build()
+                    "store_db")
+                        .fallbackToDestructiveMigration()
+                        .build()
+                        .also { instance = it }
+                }
             }
-            return  instance as StoreDatabase
+            return  instance
         }
     }
 }

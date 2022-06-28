@@ -1,35 +1,29 @@
 package com.olvera.store.repository
 
-import android.content.Context
-import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 import com.olvera.store.model.Store
 import com.olvera.store.room.StoreDao
-import com.olvera.store.room.StoreDatabase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
-open class StoreRepository(context: Context) {
+class StoreRepository(private val storeDao: StoreDao,
+private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
 
-    private val dataBase: StoreDatabase by lazy {
-        StoreDatabase.getInstance(context)
+    fun getStores(): LiveData<List<Store>> {
+        return storeDao.getAllStores()
     }
 
-    private val storeDao: StoreDao by lazy {
-        dataBase.storeDao()
-    }
-
-    fun getAllStores() = storeDao.getAllStores()
-
-    open fun insertStore(store: Store)  {
-        InsertStoreAsyncTask(storeDao).execute(store)
-    }
-
-    private class InsertStoreAsyncTask(private val storeDao: StoreDao):
-            AsyncTask<Store, Void, Void>() {
-
-        @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg param: Store?): Void? {
-            param[0]?.let { storeDao.addStore(it) }
-            return null
+    suspend fun addStore(store: Store) {
+        coroutineScope {
+            launch { storeDao.addStore(store) }
         }
     }
 
+    suspend fun deteleStore(store: Store) {
+        coroutineScope {
+            launch { storeDao.deleteStore(store) }
+        }
+    }
 }
