@@ -1,7 +1,6 @@
-package com.olvera.store.ui
+package com.olvera.store.ui.home
 
 import com.olvera.store.model.Store
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

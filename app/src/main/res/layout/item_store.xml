@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="com.olvera.store.ui.HomeViewModel" />
+            type="com.olvera.store.ui.home.HomeViewModel" />
     </data>
 
 

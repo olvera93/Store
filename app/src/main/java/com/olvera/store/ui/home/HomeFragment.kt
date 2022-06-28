@@ -1,19 +1,16 @@
-package com.olvera.store.ui
+package com.olvera.store.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.GeneratedAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.olvera.store.R
 import com.olvera.store.StoreApplication
 import com.olvera.store.databinding.FragmentHomeBinding
-import com.olvera.store.databinding.ItemStoreBinding
-import com.olvera.store.util.BaseViewModelFragment
 
 class HomeFragment : Fragment() {
 
@@ -43,6 +40,10 @@ class HomeFragment : Fragment() {
         binding.storeListViewModel = viewModel
 
         getStores()
+
+        binding.buttonAdd.setOnClickListener {
+            findNavController().navigate(R.id.nextFragment)
+        }
 
         return binding.root
     }

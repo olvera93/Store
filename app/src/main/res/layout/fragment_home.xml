@@ -6,7 +6,7 @@
     <data>
         <variable
             name="storeListViewModel"
-            type="com.olvera.store.ui.HomeViewModel"
+            type="com.olvera.store.ui.home.HomeViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

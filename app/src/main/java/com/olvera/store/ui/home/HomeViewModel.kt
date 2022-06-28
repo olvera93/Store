@@ -1,4 +1,4 @@
-package com.olvera.store.ui
+package com.olvera.store.ui.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -3,14 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/vehicleListFragment">
+    app:startDestination="@id/storeListFragment">
 
     <fragment
-        android:id="@+id/vehicleListFragment"
-        android:name="com.olvera.store.ui.HomeFragment"
-        android:label="fragment_vehicle_list"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/storeListFragment"
+        android:name="com.olvera.store.ui.home.HomeFragment"
+        android:label="fragment_store_list"
+        tools:layout="@layout/fragment_home">
 
+        <action android:id="@+id/nextFragment"
+            app:destination="@+id/addStore"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addStore"
+        android:name="com.olvera.store.ui.addStore.AddStoreFragment"
+        android:label="fragment_add_store"
+        tools:layout="@layout/fragment_add_store">
+
+        <action
+            android:id="@+id/action_addFragment_to_storeListFragment"
+            app:destination="@id/storeListFragment"
+            app:popUpTo="@id/storeListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>
